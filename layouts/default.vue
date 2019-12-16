@@ -1,39 +1,9 @@
 <template>
   <v-app light>
     <LeftNavi @isDrawer="isDrawer" :drawer="drawer" :miniVariant="miniVariant" :clipped="clipped"></LeftNavi>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+
+    <Header @isDrawer="isDrawer" @isRightDrawer="isRightDrawer" @isMiniVariant="isMiniVariant" @isClipped="isClipped" @isFixed="isFixed"
+            :clipped="clipped" :drawer="drawer" :miniVariant="miniVariant" :rightDrawer="rightDrawer" :fixed="fixed" :title="title"></Header>
     <v-content>
       <v-container>
         <nuxt />
@@ -67,10 +37,12 @@
 
 <script>
 import LeftNavi from '@/components/default/LeftNavi.vue'
+import Header from '@/components/default//Header'
 
 export default {
   components: {
-    LeftNavi
+    LeftNavi,
+    Header
   },
   data () {
     return {
@@ -85,7 +57,19 @@ export default {
   },
   methods: {
     isDrawer (value) {
-      this.drawer = value;
+      this.drawer = value
+    },
+    isRightDrawer (value) {
+      this.rightDrawer = value
+    },
+    isMiniVariant (value) {
+      this.miniVariant = value
+    },
+    isClipped (value) {
+      this.clipped = value
+    },
+    isFixed (value) {
+      this.fixed = value
     }
   }
 }
