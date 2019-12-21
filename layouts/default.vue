@@ -4,28 +4,15 @@
 
     <Header @isDrawer="isDrawer" @isRightDrawer="isRightDrawer" @isMiniVariant="isMiniVariant" @isClipped="isClipped" @isFixed="isFixed"
             :clipped="clipped" :drawer="drawer" :miniVariant="miniVariant" :rightDrawer="rightDrawer" :fixed="fixed" :title="title"></Header>
+
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+
+    <RightNavi @isRightDrawer="isRightDrawer" @isRight="isRight" :rightDrawer="rightDrawer" :right="right"></RightNavi>
+
     <v-footer
       :fixed="fixed"
       app
@@ -37,12 +24,14 @@
 
 <script>
 import LeftNavi from '@/components/default/LeftNavi.vue'
-import Header from '@/components/default//Header'
+import Header from '@/components/default//Header.vue'
+import RightNavi from '@/components/default/RightNavi.vue'
 
 export default {
   components: {
     LeftNavi,
-    Header
+    Header,
+    RightNavi
   },
   data () {
     return {
@@ -70,6 +59,9 @@ export default {
     },
     isFixed (value) {
       this.fixed = value
+    },
+    isRight (value) {
+      this.right = value
     }
   }
 }
