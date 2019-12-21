@@ -13,12 +13,7 @@
 
     <RightNavi @isRightDrawer="isRightDrawer" @isRight="isRight" :rightDrawer="rightDrawer" :right="right"></RightNavi>
 
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; 2019</span>
-    </v-footer>
+    <Footer @isFixed="isFixed" :fixed="fixed"></Footer>
   </v-app>
 </template>
 
@@ -26,12 +21,14 @@
 import LeftNavi from '@/components/default/LeftNavi.vue'
 import Header from '@/components/default//Header.vue'
 import RightNavi from '@/components/default/RightNavi.vue'
+import Footer from '@/components/default/Footer.vue'
 
 export default {
   components: {
     LeftNavi,
     Header,
-    RightNavi
+    RightNavi,
+    Footer
   },
   data () {
     return {
