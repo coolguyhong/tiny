@@ -15,7 +15,7 @@ export default {
   props: ['fixed'],
   data () {
     return {
-      fixedChild: null
+      fixedChild: false
     }
   },
   watch: {
@@ -23,7 +23,7 @@ export default {
       this.fixedChild = value
     },
     fixedChild (value) {
-      this.$emit('isFixed', value)
+      alert(value)
     }
   }
 }
