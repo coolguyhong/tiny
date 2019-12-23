@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+import bodyParser from 'body-parser'
+import session from 'express-session'
 
 export default {
   mode: 'universal',
@@ -35,12 +37,19 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify'
   ],
+  /*
+  ** 미들웨어에 접근인증을 위해 추가
+   */
+  router: {
+    middleware: 'auth'
+  },
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
   /*
   ** vuetify module configuration
@@ -63,6 +72,25 @@ export default {
       }
     }
   },
+  /*
+  ** Add server middleware
+  ** Nuxt.js uses `connect` module as server
+  ** So most of express middleware works with nuxt.js server middleware
+  */
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'super-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/signin & /api/logout routes
+    '~/api'
+  ],
   /*
   ** Build configuration
   */
