@@ -1,6 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-import bodyParser from 'body-parser'
-import session from 'express-session'
 
 export default {
   mode: 'universal',
@@ -78,17 +76,7 @@ export default {
   ** So most of express middleware works with nuxt.js server middleware
   */
   serverMiddleware: [
-    // body-parser middleware
-    bodyParser.json(),
-    // session middleware
-    session({
-      secret: 'super-secret-key',
-      resave: false,
-      saveUninitialized: false,
-      cookie: { maxAge: 60000 }
-    }),
     // Api middleware
-    // We add /api/signin & /api/logout routes
     '~/api'
   ],
   /*

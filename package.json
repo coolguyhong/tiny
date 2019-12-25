@@ -22,7 +22,8 @@
     "lowdb": "^1.0.0",
     "nuxt": "^2.11.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

@@ -1,32 +1,43 @@
 import express from 'express'
+import bodyParser from 'body-parser'
+import session from 'express-session'
+import users from './routes/users'
 
-// Create express router
-const router = express.Router()
-
+// Create express instance
 const app = express()
-router.use((req, res, next) => {
-  Object.setPrototypeOf(req, app.request)
-  Object.setPrototypeOf(res, app.response)
-  req.res = res
-  res.req = req
-  next()
-})
 
-router.post('/signin', (req, res) => {
-  if (req.body.id === 'admin' && req.body.pw === 'a00000') {
-    req.session.authUser = req.body.id
-    return res.json({ id: 'admin' })
-  }
-  return res.json({ id: '' })
-})
+// Create body parser to use 'req.body'
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-router.post('/logout', (req, res) => {
-  delete req.session.authUser
-  res.json({ ok: true })
-})
+// create session to use 'req.session'
+app.use(session({
+  secret: 'super-secret-key-Wow-This-Is-Important!',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}))
+
+// Import API Routes
+app.use(users)
 
 // Export the server middleware
 export default {
   path: '/api/v1',
-  handler: router
+  handler: app
 }
+
+// router.post('/signin', (req, res) => {
+//   if (req.body.id === 'admin' && req.body.pw === 'a00000') {
+//     req.session.authUser = req.body.id
+//     return res.json({ id: 'admin' })
+//   }
+//   return res.json({ id: '' })
+// })
+//
+// router.post('/logout', (req, res) => {
+//   delete req.session.authUser
+//   res.json({ ok: true })
+// })
+
+
