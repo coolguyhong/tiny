@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "lowdb": "^1.0.0",
-    "nuxt": "^2.11.0",
+    "nuxt": "^2.15.8",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "uuid": "^3.3.3"
